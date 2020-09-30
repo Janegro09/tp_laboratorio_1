@@ -64,18 +64,12 @@ int addEmployee(Employee* list, int len, int id, char name[], char lastName[], f
 int findEmployeeById(Employee* list, int len, int id)
 {
 	int retorno=-1;
-	printf("%d",list[0].id);
 	for(int i=0;list[i].isEmpty ==0;i++)
 	{
 		if(list[i].id==id)
 		{
-			if(list[i].isEmpty != 0)
-			{
-				retorno=i;
-				break;
-			}else {
-				break;
-			}
+			retorno=i;
+			break;
 		}
 	}
 	return retorno;

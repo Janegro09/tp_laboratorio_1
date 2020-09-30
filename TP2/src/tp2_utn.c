@@ -6,6 +6,7 @@
 #include "utn.h"
 #include "tp2_utn.h"
 
+static int generarNuevoId(void);
 /*static int obtenerIndice(Employee array[], int* indice);*/
 
 int alta(Employee array[], int size_array)
@@ -16,11 +17,8 @@ int alta(Employee array[], int size_array)
 	int retorno=-1;
 	Employee bufferEmpleado;
 
-	resultadoGet=utn_getEntero("Ingrese un id\n", "error al ingresar el id\n", 3, 1000,1, &bufferEmpleado.id);
-	//valido id
-	posicion=findEmployeeById(array,SIZE_ARRAY,bufferEmpleado.id);
-	if(resultadoGet==0 && posicion==-1)
-	{
+	bufferEmpleado.id=generarNuevoId();
+
 	//Valido nombre y apellido
 		if(
 			utn_getCadenaValida("Ingresá un nombre\n", "No ingresaste un nombre válido\n", 3,sizeof(bufferEmpleado.name), bufferEmpleado.name)==0 &&
@@ -43,19 +41,11 @@ int alta(Employee array[], int size_array)
 		} else {
 			printf("Error con el Nombre y/o Apellido ingresado\n");
 		}
-	} else {
-		printf("Error con el ID ingresado o ya existente\n");
-	}
+
 return retorno;
 }
 
 
-/* int obtenerIndice(Employee array[], int* indice)
-{
-	printf("Hola");
-	*indice=0;
-	return 0;
-}*/
 int modificar(Employee array[])
 {
 	int retorno;
@@ -117,4 +107,13 @@ void informar(Employee array[])
 {
 	printf("Nombre y Apellido: %s %s\n",array[0].name, array[0].lastName);
 	printf("Elegiste la opcion de informar\n");
+}
+
+
+//genera ID
+static int generarNuevoId(void)
+{
+	static int id =0;
+	id++;
+	return id;
 }
