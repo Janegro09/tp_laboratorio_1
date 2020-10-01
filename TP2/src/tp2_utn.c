@@ -7,18 +7,17 @@
 #include "tp2_utn.h"
 
 static int generarNuevoId(void);
+void generarHarcodeo(Employee array[]);
+
 /*static int obtenerIndice(Employee array[], int* indice);*/
 
 int alta(Employee array[], int size_array)
 {
-	int posicion;
+	//int posicion;
 	int resultadoGet;
 	//int indice;
 	int retorno=-1;
 	Employee bufferEmpleado;
-
-	bufferEmpleado.id=generarNuevoId();
-
 	//Valido nombre y apellido
 		if(
 			utn_getCadenaValida("Ingresá un nombre\n", "No ingresaste un nombre válido\n", 3,sizeof(bufferEmpleado.name), bufferEmpleado.name)==0 &&
@@ -31,6 +30,7 @@ int alta(Employee array[], int size_array)
 				resultadoGet=utn_getEntero("Ingresá el sector\n", "Error con el dato ingresado\n", 3, MAX_ID, MIN_ID, &bufferEmpleado.sector);
 				if(resultadoGet==0)
 				{
+					bufferEmpleado.id=generarNuevoId();
 					retorno=addEmployee(array, size_array, bufferEmpleado.id, bufferEmpleado.name, bufferEmpleado.lastName, bufferEmpleado.salary, bufferEmpleado.sector);
 				} else {
 					printf("Error con el sector ingresado\n");
@@ -105,7 +105,11 @@ int baja(Employee array[],int len)
 	int resultadoGet;
 	int idSeleccionado;
 	resultadoGet=utn_getEntero("Ingrese un id", "Error con el ID ingresado", 3, MAX_ID, MIN_ID, &idSeleccionado);
-
+	if(resultadoGet==0)
+	{
+		removeEmployee(array, SIZE_ARRAY,idSeleccionado);
+		retorno=0;
+	}
 	return retorno;
 }
 void informar(Employee array[])
@@ -121,4 +125,20 @@ static int generarNuevoId(void)
 	static int id=-1;
 	id++;
 	return id;
+}
+
+void generarHarcodeo(Employee array[])
+{
+	Employee auxBuffer;
+	for (int i=0;i<10;i++)
+	{
+		auxBuffer.id=i;
+		auxBuffer.isEmpty=0;
+		strncpy(auxBuffer.lastName, "nombre",SIZE_NAME);
+		strncpy(auxBuffer.name, "apellido",SIZE_LASTNAME);
+		auxBuffer.salary=10000.5;
+		auxBuffer.sector=i*10;
+
+		array[i]=auxBuffer;
+	}
 }

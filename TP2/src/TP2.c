@@ -20,6 +20,7 @@ int main(void) {
 	int resultadoGetEntero;
 	int resultadoOperacion;
 	initEmployees(arrayEmpleados, SIZE_ARRAY);
+	generarHarcodeo(arrayEmpleados);
 	do {
 		resultadoGetEntero=utn_getEntero("Bienvenido, ingresá una opción\n1) Alta\n2) Modificacion\n3) Baja\n4) Informar\n5) Salir\n", "Error - opción invalida\n", 3, 5, 1, &opcion);
 		switch(opcion)
