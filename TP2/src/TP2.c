@@ -48,7 +48,7 @@ int main(void) {
 				break;
 			case 3:
 				printf(BARRA_SEPARADORA);
-				baja();
+				resultadoOperacion=baja(arrayEmpleados,SIZE_ARRAY);
 				printf(BARRA_SEPARADORA);
 				break;
 			case 4:

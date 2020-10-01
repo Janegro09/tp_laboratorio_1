@@ -99,9 +99,14 @@ int modificar(Employee array[])
 	return retorno;
 }
 
-void baja()
+int baja(Employee array[],int len)
 {
-	printf("Elegiste la opcion de baja\n");
+	int retorno=-1;
+	int resultadoGet;
+	int idSeleccionado;
+	resultadoGet=utn_getEntero("Ingrese un id", "Error con el ID ingresado", 3, MAX_ID, MIN_ID, &idSeleccionado);
+
+	return retorno;
 }
 void informar(Employee array[])
 {
@@ -113,7 +118,7 @@ void informar(Employee array[])
 //genera ID
 static int generarNuevoId(void)
 {
-	static int id =0;
+	static int id=-1;
 	id++;
 	return id;
 }

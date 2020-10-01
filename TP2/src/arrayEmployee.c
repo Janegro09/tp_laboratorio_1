@@ -42,14 +42,10 @@ int addEmployee(Employee* list, int len, int id, char name[], char lastName[], f
 	aux.salary=salary;
 	aux.sector=sector;
 
-	for (int i=0;i<len;i++)
+	if(id<len)
 	{
-		if(list[i].isEmpty!=0)
-		{
-			retorno=0;
-			list[i]=aux;
-			break;
-		}
+		retorno=0;
+		list[id]=aux;
 	}
 	return retorno;
 }
@@ -83,7 +79,13 @@ int findEmployeeById(Employee* list, int len, int id)
  */
 int removeEmployee(Employee* list, int len, int id)
 {
-	return -1;
+	int retorno=-1;
+	if(list[id].isEmpty==0)
+	{
+		retorno=0;
+		list[id].isEmpty=1;
+	}
+	return retorno;
 }
 
 /**	\brief 	Ordena el array de empleados por apellido y sector de manera ascendente o descendente
