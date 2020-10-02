@@ -9,13 +9,15 @@
 static int generarNuevoId(void);
 void generarHarcodeo(Employee array[]);
 
-/*static int obtenerIndice(Employee array[], int* indice);*/
 
+/** \brief	opcion de alta del menu,se encarga de pedir los datos al usuario
+ * 	\param 	list Employee* Pointer to array of employees
+ * 	\param 	len int Array length
+ * 	\return	int Return (-1) if Error [Invalid length or NULL pointer] - 0 if ok
+ */
 int alta(Employee array[], int size_array)
 {
-	//int posicion;
 	int resultadoGet;
-	//int indice;
 	int retorno=-1;
 	Employee bufferEmpleado;
 	//Valido nombre y apellido
@@ -30,6 +32,7 @@ int alta(Employee array[], int size_array)
 				resultadoGet=utn_getEntero("Ingresá el sector\n", "Error con el dato ingresado\n", 3, MAX_ID, MIN_ID, &bufferEmpleado.sector);
 				if(resultadoGet==0)
 				{
+					//Si todo esta ok, ahi te pide el id
 					bufferEmpleado.id=generarNuevoId();
 					retorno=addEmployee(array, size_array, bufferEmpleado.id, bufferEmpleado.name, bufferEmpleado.lastName, bufferEmpleado.salary, bufferEmpleado.sector);
 				} else {
@@ -45,15 +48,21 @@ int alta(Employee array[], int size_array)
 return retorno;
 }
 
-
+/** \brief	opcion de modificacion del menu, pide un id, chequea que exista y vuelve a ingresar los datos
+ * 	\param 	list Employee* Pointer to array of employees
+ * 	\param 	len int Array length
+ * 	\return	int Return (-1) if Error [Invalid length or NULL pointer] - 0 if ok
+ */
 int modificar(Employee array[])
 {
-	int retorno;
+	int retorno =-1;
 	int posicion;
 	int opcion;
 	int idEmpleado;
 	int resultadoGet;
 	Employee bufferEmpleado;
+	if( array!=NULL)
+	{
 
 	resultadoGet=utn_getEntero("Ingresá un Id valido\n", "Error id ingresado incorrrectamente\n", 3, ID_MAXIMO, ID_MINIMO, &idEmpleado);
 	posicion=findEmployeeById(array,SIZE_ARRAY,idEmpleado);
@@ -96,19 +105,27 @@ int modificar(Employee array[])
 	} else {
 		printf("Empleado no encontrado con ese Id\n");
 	}
+	}
 	return retorno;
 }
-
+/** \brief	opcion de baja del menu, donde se le pide el id al usuario
+ * 	\param 	Array of employees
+ * 	\param 	len int Array length
+ * 	\return	int Return (-1) if Error [Invalid length or NULL pointer] - 0 if ok
+ */
 int baja(Employee array[],int len)
 {
 	int retorno=-1;
 	int resultadoGet;
 	int idSeleccionado;
-	resultadoGet=utn_getEntero("Ingrese un id a dar de baja\n", "Error con el ID ingresado\n", 3, MAX_ID, MIN_ID, &idSeleccionado);
-	if(resultadoGet==0)
+	if( array!=NULL && len>0)
 	{
-		removeEmployee(array, SIZE_ARRAY,idSeleccionado);
-		retorno=0;
+		resultadoGet=utn_getEntero("Ingrese un id a dar de baja\n", "Error con el ID ingresado\n", 3, MAX_ID, MIN_ID, &idSeleccionado);
+		if(resultadoGet==0)
+		{
+			removeEmployee(array, SIZE_ARRAY,idSeleccionado);
+			retorno=0;
+		}
 	}
 	return retorno;
 }
@@ -116,14 +133,17 @@ int baja(Employee array[],int len)
 void informar(Employee array[], int len)
 {
 	int resultadoOperacion;
-	//1 de menor a mayor
-	//0 de mayor a menor
-	ordenarArray(array, len, 1);
-	printf("%-6s%-30s%-30s%-10s%-3s\n","id","nombre","apellido","salario","sector");
-	resultadoOperacion=	printEmployees(array,SIZE_ARRAY);
-	if(resultadoOperacion!=0)
+	if(array!=NULL && len>0)
 	{
-		printf("No se han ingresado empleados\n");
+		//1 de menor a mayor
+		//0 de mayor a menor
+		sortEmployees(array, len, 1);
+		printf("%-6s%-30s%-30s%-10s%-3s\n","id","nombre","apellido","salario","sector");
+		resultadoOperacion=	printEmployees(array,SIZE_ARRAY);
+		if(resultadoOperacion!=0)
+		{
+			printf("No se han ingresado empleados\n");
+		}
 	}
 }
 
@@ -136,7 +156,11 @@ static int generarNuevoId(void)
 	return id;
 }
 
-
+/** \brief	opcion de alta del menu,se encarga de pedir los datos al usuario
+ * 	\param 	list Employee* Pointer to array of employees
+ * 	\param 	len int Array length
+ * 	\return	int Return (-1) if Error [Invalid length or NULL pointer] - 0 if ok
+ */
 int ordenarArray(Employee array[],int len, int orden)
 {
 	int retorno = -1;
@@ -182,7 +206,11 @@ int ordenarArray(Employee array[],int len, int orden)
 	return retorno;
 }
 
-
+/** \brief	solo para generar y probar con usuarios random
+ * 	\param 	list Employee* Pointer to array of employees
+ * 	\param 	len int Array length
+ * 	\return	int Return (-1) if Error [Invalid length or NULL pointer] - 0 if ok
+ */
 void generarHarcodeo(Employee array[])
 {
 	Employee auxBuffer;

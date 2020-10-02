@@ -96,8 +96,46 @@ int removeEmployee(Employee* list, int len, int id)
  */
 int sortEmployees(Employee* list, int len, int order)
 {
-	return 0;
-}
+	int retorno = -1;
+	int i;
+	Employee aux;
+	int estadoDesordenado=1;
+
+	if(list != NULL && len > 0)
+	{
+		while(estadoDesordenado)//mientras este desordenado
+		{
+			estadoDesordenado = 0;
+			for(i = 0; i < (len - 1); i++)
+			{
+				if(
+					(order == 1 &&
+					((strncmp(list[i].name, list[i + 1].name,len)>=0)))
+						||
+					(order == 0 &&
+					((strncmp(list[i].name, list[i + 1].name,len)<=0)))
+				  )
+				{
+					if(
+						(order == 1 &&
+						((list[i].sector > list[i + 1].sector)))
+							||
+						(order == 0 &&
+						((list[i].sector < list[i + 1].sector)))
+					  )
+					{
+					aux = list[i];
+					list[i] = list[i + 1];
+					list[i + 1] = aux;
+					estadoDesordenado = 1;
+					}
+				}
+			}
+		}
+
+		retorno = 1;
+	}
+	return retorno;}
 
 /** \brief print the content of employees array
  * \param list Employee*
