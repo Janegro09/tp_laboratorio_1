@@ -106,18 +106,46 @@ int sortEmployees(Employee* list, int len, int order)
  */
 int printEmployees(Employee* list, int lenght)
 {
-	printf("%-6s%-30s%-30s%-10s%-3s\n","id","nombre","apellido","salario","sector");
-	if(list[0].isEmpty==0)
+	int banderaEmpleados=-1;
+	float salarioTotal=0;
+	float salarioPromedio;
+	int cantidad=0;
+	int cantEncimaPromedio=0;
+
+	for(int i=0;i<lenght;i++)
 	{
-		for(int i=0;i<lenght;i++)
+		if(list[i].isEmpty==0)
 		{
-			if(list[i].isEmpty==0)
+			salarioTotal=list[i].salary+salarioTotal;
+			cantidad++;
+		}
+	}
+
+	if(cantidad>0)
+	{
+	salarioPromedio=salarioTotal/cantidad;
+	}
+
+
+	for(int i=0;i<lenght;i++)
+	{
+		if(list[i].isEmpty==0)
+		{
+			banderaEmpleados=0;
+			printf("%-6d%-30s%-30s%-10.2f%-3d\n",list[i].id, list[i].name,list[i].lastName,list[i].salary,list[i].sector);
+
+			if(list[i].salary>salarioPromedio)
 			{
-				printf("%-6d%-30s%-30s%-10.2f%-3d\n",list[i].id, list[i].name,list[i].lastName,list[i].salary,list[i].sector);
+				cantEncimaPromedio++;
 			}
 		}
-	} else {
-		printf("No se han ingresado empleados\n");
 	}
-	return 0;
+	if(banderaEmpleados==0)
+	{
+		printf("Total Salario: $%.2f\n"
+				"Total Salario Promedio: $%.2f\n"
+				"Cantidad de empleados que superan el salario promedio: %d\n", salarioTotal,salarioPromedio,cantEncimaPromedio);
+	}
+
+	return banderaEmpleados;
 }

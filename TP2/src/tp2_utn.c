@@ -104,7 +104,7 @@ int baja(Employee array[],int len)
 	int retorno=-1;
 	int resultadoGet;
 	int idSeleccionado;
-	resultadoGet=utn_getEntero("Ingrese un id", "Error con el ID ingresado", 3, MAX_ID, MIN_ID, &idSeleccionado);
+	resultadoGet=utn_getEntero("Ingrese un id a dar de baja\n", "Error con el ID ingresado\n", 3, MAX_ID, MIN_ID, &idSeleccionado);
 	if(resultadoGet==0)
 	{
 		removeEmployee(array, SIZE_ARRAY,idSeleccionado);
@@ -112,10 +112,19 @@ int baja(Employee array[],int len)
 	}
 	return retorno;
 }
-void informar(Employee array[])
+
+void informar(Employee array[], int len)
 {
-	printf("Nombre y Apellido: %s %s\n",array[0].name, array[0].lastName);
-	printf("Elegiste la opcion de informar\n");
+	int resultadoOperacion;
+	//1 de menor a mayor
+	//0 de mayor a menor
+	ordenarArray(array, len, 1);
+	printf("%-6s%-30s%-30s%-10s%-3s\n","id","nombre","apellido","salario","sector");
+	resultadoOperacion=	printEmployees(array,SIZE_ARRAY);
+	if(resultadoOperacion!=0)
+	{
+		printf("No se han ingresado empleados\n");
+	}
 }
 
 
@@ -127,18 +136,94 @@ static int generarNuevoId(void)
 	return id;
 }
 
+
+int ordenarArray(Employee array[],int len, int orden)
+{
+	int retorno = -1;
+	int i;
+	Employee aux;
+	int estadoDesordenado=1;
+
+	if(array != NULL && len > 0)
+	{
+		while(estadoDesordenado)//mientras este desordenado
+		{
+			estadoDesordenado = 0;
+			for(i = 0; i < (len - 1); i++)
+			{
+				if((orden == 1 && strncmp(array[i].name, array[i + 1].name,len)>0)
+						||
+				  (orden == 0 && strncmp(array[i].name, array[i + 1].name,len)<0))
+				{
+					aux = array[i];
+					array[i] = array[i + 1];
+					array[i + 1] = aux;
+					estadoDesordenado = 1;
+				}
+			}
+		}
+		estadoDesordenado=1;
+		while(estadoDesordenado)//mientras este desordenado
+				{
+					estadoDesordenado = 0;
+					for(i = 0; i < (len - 1); i++)
+					{
+						if((orden == 1 && (array[i].sector > array[i + 1].sector))
+								||
+						  (orden == 0 && (array[i].sector < array[i + 1].sector)))
+						{
+							aux = array[i];
+							array[i] = array[i + 1];
+							array[i + 1] = aux;
+							estadoDesordenado = 1;
+						}
+					}
+				}
+		retorno = 1;
+	}
+	return retorno;
+}
+
+
 void generarHarcodeo(Employee array[])
 {
 	Employee auxBuffer;
-	for (int i=0;i<10;i++)
-	{
-		auxBuffer.id=i;
-		auxBuffer.isEmpty=0;
-		strncpy(auxBuffer.lastName, "nombre",SIZE_NAME);
-		strncpy(auxBuffer.name, "apellido",SIZE_LASTNAME);
-		auxBuffer.salary=10000.5;
-		auxBuffer.sector=i*10;
 
-		array[i]=auxBuffer;
-	}
+	auxBuffer.id=2;
+	auxBuffer.isEmpty=0;
+	strncpy(auxBuffer.lastName, "Javier",SIZE_NAME);
+	strncpy(auxBuffer.name, "Sosa",SIZE_LASTNAME);
+	auxBuffer.salary=75000;
+	auxBuffer.sector=125;
+
+	array[0]=auxBuffer;
+
+	auxBuffer.id=3;
+	auxBuffer.isEmpty=0;
+	strncpy(auxBuffer.lastName, "Bernardo",SIZE_NAME);
+	strncpy(auxBuffer.name, "Neustad",SIZE_LASTNAME);
+	auxBuffer.salary=75000;
+	auxBuffer.sector=75;
+
+	array[1]=auxBuffer;
+
+	auxBuffer.id=0;
+	auxBuffer.isEmpty=0;
+	strncpy(auxBuffer.lastName, "Bernardo",SIZE_NAME);
+	strncpy(auxBuffer.name, "Sosa",SIZE_LASTNAME);
+	auxBuffer.salary=75000;
+	auxBuffer.sector=125;
+
+	array[2]=auxBuffer;
+
+	auxBuffer.id=1;
+	auxBuffer.isEmpty=0;
+	strncpy(auxBuffer.lastName, "Juan",SIZE_NAME);
+	strncpy(auxBuffer.name, "Sosa",SIZE_LASTNAME);
+	auxBuffer.salary=75000;
+	auxBuffer.sector=120;
+
+	array[3]=auxBuffer;
+
 }
+

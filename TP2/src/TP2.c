@@ -54,8 +54,7 @@ int main(void) {
 				break;
 			case 4:
 				printf(BARRA_SEPARADORA);
-				//informar(arrayEmpleados);
-				printEmployees(arrayEmpleados,SIZE_ARRAY);
+				informar(arrayEmpleados, SIZE_ARRAY);
 				printf(BARRA_SEPARADORA);
 				break;
 		}

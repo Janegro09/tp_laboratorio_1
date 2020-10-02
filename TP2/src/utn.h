@@ -2,8 +2,8 @@
 #define SIZE_LASTNAME 50
 #define MAX_SALARIO 500000.00
 #define MIN_SALARIO 0.00
-#define MAX_ID 1000
-#define MIN_ID 1
+#define MAX_ID 999
+#define MIN_ID 0
 
 #define ID_MAXIMO 1000
 #define ID_MINIMO 1
