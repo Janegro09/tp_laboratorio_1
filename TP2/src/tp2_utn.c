@@ -142,6 +142,7 @@ int ordenarArray(Employee array[],int len, int orden)
 	int retorno = -1;
 	int i;
 	Employee aux;
+	Employee aux2;
 	int estadoDesordenado=1;
 
 	if(array != NULL && len > 0)
@@ -151,34 +152,31 @@ int ordenarArray(Employee array[],int len, int orden)
 			estadoDesordenado = 0;
 			for(i = 0; i < (len - 1); i++)
 			{
-				if((orden == 1 && strncmp(array[i].name, array[i + 1].name,len)>0)
+				if(
+					(orden == 1 &&
+					((strncmp(array[i].name, array[i + 1].name,len)>=0)))
 						||
-				  (orden == 0 && strncmp(array[i].name, array[i + 1].name,len)<0))
+					(orden == 0 &&
+					((strncmp(array[i].name, array[i + 1].name,len)<=0)))
+				  )
 				{
+					if(
+						(orden == 1 &&
+						((array[i].sector > array[i + 1].sector)))
+							||
+						(orden == 0 &&
+						((array[i].sector < array[i + 1].sector)))
+					  )
+					{
 					aux = array[i];
 					array[i] = array[i + 1];
 					array[i + 1] = aux;
 					estadoDesordenado = 1;
+					}
 				}
 			}
 		}
-		estadoDesordenado=1;
-		while(estadoDesordenado)//mientras este desordenado
-				{
-					estadoDesordenado = 0;
-					for(i = 0; i < (len - 1); i++)
-					{
-						if((orden == 1 && (array[i].sector > array[i + 1].sector))
-								||
-						  (orden == 0 && (array[i].sector < array[i + 1].sector)))
-						{
-							aux = array[i];
-							array[i] = array[i + 1];
-							array[i + 1] = aux;
-							estadoDesordenado = 1;
-						}
-					}
-				}
+
 		retorno = 1;
 	}
 	return retorno;
@@ -224,6 +222,33 @@ void generarHarcodeo(Employee array[])
 	auxBuffer.sector=120;
 
 	array[3]=auxBuffer;
+
+	auxBuffer.id=12;
+	auxBuffer.isEmpty=0;
+	strncpy(auxBuffer.lastName, "Sancho",SIZE_NAME);
+	strncpy(auxBuffer.name, "zaras",SIZE_LASTNAME);
+	auxBuffer.salary=75000;
+	auxBuffer.sector=10;
+
+	array[4]=auxBuffer;
+
+	auxBuffer.id=13;
+	auxBuffer.isEmpty=0;
+	strncpy(auxBuffer.lastName, "Sancho",SIZE_NAME);
+	strncpy(auxBuffer.name, "zaras",SIZE_LASTNAME);
+	auxBuffer.salary=75000;
+	auxBuffer.sector=110;
+
+	array[5]=auxBuffer;
+
+	auxBuffer.id=14;
+	auxBuffer.isEmpty=0;
+	strncpy(auxBuffer.lastName, "Sancho",SIZE_NAME);
+	strncpy(auxBuffer.name, "zaras",SIZE_LASTNAME);
+	auxBuffer.salary=75000;
+	auxBuffer.sector=5;
+
+	array[6]=auxBuffer;
 
 }
 

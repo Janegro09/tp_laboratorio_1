@@ -50,11 +50,24 @@ int main(void) {
 			case 3:
 				printf(BARRA_SEPARADORA);
 				resultadoOperacion=baja(arrayEmpleados,SIZE_ARRAY);
+				if(resultadoOperacion==0)
+				{
+					printf("Baja realizada correctamente\n");
+				} else {
+					printf("No se pudo realizar la baja\n");
+				}
+
 				printf(BARRA_SEPARADORA);
 				break;
 			case 4:
 				printf(BARRA_SEPARADORA);
 				informar(arrayEmpleados, SIZE_ARRAY);
+				if(resultadoOperacion==0)
+				{
+					printf("Baja realizada correctamente\n");
+				} else {
+					printf("No se pudo realizar la baja\n");
+				}
 				printf(BARRA_SEPARADORA);
 				break;
 		}
