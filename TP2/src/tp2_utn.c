@@ -50,7 +50,6 @@ return retorno;
 
 /** \brief	opcion de modificacion del menu, pide un id, chequea que exista y vuelve a ingresar los datos
  * 	\param 	list Employee* Pointer to array of employees
- * 	\param 	len int Array length
  * 	\return	int Return (-1) if Error [Invalid length or NULL pointer] - 0 if ok
  */
 int modificar(Employee array[])
@@ -129,7 +128,11 @@ int baja(Employee array[],int len)
 	}
 	return retorno;
 }
-
+/** \brief	opcion para mostrar la info de la carga realizada
+ * 	\param 	Array of employees
+ * 	\param 	len int Array length
+ * 	\return	int Return (-1) if Error [Invalid length or NULL pointer] - 0 if ok
+ */
 void informar(Employee array[], int len)
 {
 	int resultadoOperacion;

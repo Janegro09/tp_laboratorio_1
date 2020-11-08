@@ -1,6 +1,6 @@
 /*
  ============================================================================
- Name        : tp_2.c
+ Name        : TP3.c
  Author      : 
  Version     :
  Copyright   : Your copyright notice
@@ -11,7 +11,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(void) {
+int main2(void) {
 	puts("!!!Hello World!!!"); /* prints !!!Hello World!!! */
 	return EXIT_SUCCESS;
 }
