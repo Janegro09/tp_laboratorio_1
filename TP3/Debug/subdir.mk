@@ -9,6 +9,7 @@ C_SRCS += \
 ../LinkedList.c \
 ../main.c \
 ../parser.c \
+../punteros.c \
 ../utn.c 
 
 OBJS += \
@@ -17,6 +18,7 @@ OBJS += \
 ./LinkedList.o \
 ./main.o \
 ./parser.o \
+./punteros.o \
 ./utn.o 
 
 C_DEPS += \
@@ -25,6 +27,7 @@ C_DEPS += \
 ./LinkedList.d \
 ./main.d \
 ./parser.d \
+./punteros.d \
 ./utn.d 
 
 
