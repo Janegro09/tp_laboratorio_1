@@ -7,10 +7,32 @@
 
 
 /*Employee* employee_newParametros(char* idStr,char* nombreStr,char* horasTrabajadasStr);
-void employee_delete();
-Employee* employee_new();
-
 */
+
+Employee* employee_new(void){
+	Employee* emple_aux;
+
+	emple_aux = (Employee*)malloc(sizeof(Employee));
+	if(emple_aux!=NULL)
+	{
+		emple_aux->horasTrabajadas=0;
+		emple_aux->id=0;
+		emple_aux->nombre[0]='\0';
+		emple_aux->sueldo=0;
+		return emple_aux;
+	}else {
+		return NULL;
+	}
+}
+
+void employee_delete(Employee *this)
+{
+	if(this !=NULL)
+	{
+		free(this);
+	}
+}
+
 
 int employee_setId(Employee* this,int id)
 {
